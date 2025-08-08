@@ -41,6 +41,20 @@ def check_data_quality(df):
     print("--------------------------------")
     return df
 
+def profile_data(df):
+    """
+    Generates and prints a basic statistical profile of the data.
+    """
+    print("\n--- Running Data Profile ---")
+    print(df.describe())
+    print("----------------------------")
+
+    # Also, check the data types of each column
+    print("\n--- Data Types ---")
+    print(df.info())
+    print("----------------------------")
+
+
 if __name__ == '__main__':
     # Create a sample DataFrame
     df = create_sample_data()
@@ -50,6 +64,8 @@ if __name__ == '__main__':
 
     # Perform a data quality check on the cleaned data
     check_data_quality(cleaned_df)
+    # data information
+    profile_data(cleaned_df)
     # Save the transformed data to a new CSV file
     output_path = 'cleaned_data.csv'
     cleaned_df.to_csv(output_path, index=False)
