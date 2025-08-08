@@ -26,6 +26,20 @@ def clean_and_transform_data(df):
     df['transformed_feature'] = df['feature_1'] * df['feature_2']
 
     return df
+def check_data_quality(df):
+    """
+    Performs a basic data quality check.
+    - Checks for null values and prints a summary.
+    """
+    print("--- Running Data Quality Check ---")
+    null_counts = df.isnull().sum()
+    if null_counts.sum() > 0:
+        print("Warning: Missing values found in the following columns:")
+        print(null_counts[null_counts > 0])
+    else:
+        print("No missing values found. Data quality is good.")
+    print("--------------------------------")
+    return df
 
 if __name__ == '__main__':
     # Create a sample DataFrame
@@ -34,8 +48,11 @@ if __name__ == '__main__':
     # Perform a cleaning and transformation step
     cleaned_df = clean_and_transform_data(df)
 
+    # Perform a data quality check on the cleaned data
+    check_data_quality(cleaned_df)
     # Save the transformed data to a new CSV file
     output_path = 'cleaned_data.csv'
     cleaned_df.to_csv(output_path, index=False)
-
+    
     print(f"Cleaned data successfully saved to {output_path}")
+    
